@@ -5,24 +5,8 @@ import { createHashHistory } from 'history'
 import { Provider } from 'mobx-react'
 import { install, RouterProvider } from 'mobx-little-router-react'
 import createStores from './stores'
-// import {
-//   HomeRoute,
-//   LoginRoute,
-//   AboutRoute,
-//   ContactRoute,
-//   TagRoute,
-//   ActorRoute,
-//   AdminRoute,
-//   CollectionsRoute,
-//   CollectionRoute
-// } from './routes'
 import App from './App'
 import routes from './routes'
-
-// const delay = ms =>
-//   new Promise(resolve => {
-//     setTimeout(resolve, ms)
-//   })
 
 const stores = createStores()
 
