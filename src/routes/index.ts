@@ -1,11 +1,72 @@
-export { default as HomeRoute } from './HomeRoute'
-export { default as AboutRoute } from './AboutRoute'
-export { default as ContactRoute } from './ContactRoute'
-export { default as ShowsRoute } from './shows/ShowsRoute'
-export { default as ShowRoute } from './shows/ShowRoute'
-export { default as TagRoute } from './TagRoute'
-export { default as ActorRoute } from './ActorRoute'
-export { default as AdminRoute } from './AdminRoute'
-export { default as LoginRoute } from './LoginRoute'
-export { default as CollectionsRoute } from './CollectionsRoute'
-export { default as CollectionRoute } from './CollectionRoute'
+import HomeRoute from './HomeRoute'
+import AboutRoute from './AboutRoute'
+import ContactRoute from './ContactRoute'
+import ShowsRoute from './shows/ShowsRoute'
+import ShowRoute from './shows/ShowRoute'
+import TagRoute from './TagRoute'
+import ActorRoute from './ActorRoute'
+import AdminRoute from './AdminRoute'
+import LoginRoute from './LoginRoute'
+import CollectionsRoute from './CollectionsRoute'
+import CollectionRoute from './CollectionRoute'
+
+export default <any>[
+  { path: '', component: HomeRoute },
+  { path: 'login', component: LoginRoute },
+  { path: 'about', component: AboutRoute, animate: true },
+  { path: 'contact', component: ContactRoute, animate: true },
+  {
+    path: 'collections',
+    component: CollectionsRoute,
+    children: [
+      { path: ':collectionId', component: CollectionRoute },
+      { path: '', redirectTo: 'a' }
+    ]
+  },
+  {
+    path: 'shows',
+    loadChildren: () => import('./shows')
+  },
+  {
+    path: 'actors/:id',
+    component: ActorRoute,
+    outlet: 'modal',
+    animate: true
+  },
+  {
+    path: 'tags/:tag',
+    component: TagRoute
+  },
+  // Redirects
+  {path: 'actors', redirectTo: '/' },
+  {path: 'tags', redirectTo: '/' },
+  {
+    // Using relative path
+    path: 'redirect',
+    children: [
+      { path: '', redirectTo: '../shows' }
+    ]
+  },
+  // Admin route with a session guard
+  {
+    path: 'admin',
+    component: AdminRoute,
+    canActivate: (route, navigation) => {
+      const { stores: { SessionStore } } = route.context
+      if (SessionStore.isAuthenticated) {
+        return true
+      } else {
+        SessionStore.unauthorizedNavigation = navigation
+        return navigation.redirectTo('/login')
+      }
+    },
+    canDeactivate: (route, navigation) => {
+      if (window.confirm('Discard changes?')) {
+        return true
+      }
+      return false
+    } // ,
+    // Fakes network delay
+    // willResolve: () => delay(20 + Math.random() * 200)
+  }
+]
