@@ -72,7 +72,7 @@ module.exports = {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
-      reportFilename: '.stats/index.html'
+      reportFilename: '../.stats/index.html'
     })
   ],
   module: {

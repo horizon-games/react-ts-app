@@ -1,4 +1,5 @@
 .vscode
+.stats
 node_modules
 npm-debug.log
 dist

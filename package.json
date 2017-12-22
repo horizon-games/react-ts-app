@@ -9,7 +9,7 @@
     "dist:build": "yarn dist:clean && webpack --color --config internal/webpack/webpack.config.production.js",
     "dist:clean": "rm -rf ./dist",
     "dist:serve": "serve --silent --port 4000 ./dist",
-    "dist:analyze": "serve --silent --open --port 5555 ./dist/.stats",
+    "dist:analyze": "serve --silent --open --port 5555 ./.stats",
     "lint": "tslint -c tslint.json src/**/*.ts src/**/*.tsx",
     "test:watch": "jest --watchAll",
     "test": "jest --ci --runInBand"
