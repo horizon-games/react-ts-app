@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // const shared = require('./shared');
 const main = [
@@ -42,10 +43,12 @@ module.exports = {
       checkSyntacticErrors: true
     }),
     new webpack.NoEmitOnErrorsPlugin(),
-    new UglifyJSPlugin(/*{
-      unused: true,
-      dead_code: true
-    }*/),
+    new UglifyJSPlugin({
+      uglifyOptions: {
+        unused: true,
+        dead_code: true
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
@@ -66,6 +69,11 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false,
+      reportFilename: '.stats/index.html'
+    })
   ],
   module: {
     rules: [{

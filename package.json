@@ -5,8 +5,10 @@
   "license": "none",
   "scripts": {
     "start": "webpack-dev-server --progress --color --config internal/webpack/webpack.config.development.js",
-    "clean:build": "rm -rf ./dist",
-    "build": "yarn clean:build && webpack --color --config internal/webpack/webpack.config.production.js",
+    "dist": "yarn dist:build",
+    "dist:build": "yarn dist:clean && webpack --color --config internal/webpack/webpack.config.production.js",
+    "dist:clean": "rm -rf ./dist",
+    "dist:analyze": "serve --silent --open --port 5555 ./dist/.stats",
     "lint": "tslint -c tslint.json src/**/*.ts src/**/*.tsx",
     "test:watch": "jest --watchAll",
     "test": "jest --ci --runInBand"
@@ -34,8 +36,10 @@
     "jest": "^22.0.4",
     "prettier": "^1.9.2",
     "react-hot-loader": "^3.0.0",
+    "serve": "^6.4.3",
     "source-map-loader": "^0.2.1",
     "styled-components": "^2.4.0",
+    "styled-map": "^2.0.1",
     "ts-jest": "^22.0.0",
     "ts-loader": "^3.0.0",
     "tslint": "^5.8.0",

@@ -29,10 +29,10 @@ module.exports = {
     publicPath: "/"
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor.js'
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   filename: 'vendor.js'
+    // }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new ForkTsCheckerWebpackPlugin({
@@ -47,7 +47,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: 'src/index.html'
-    }),
+    })
   ],
   module: {
     rules: [{

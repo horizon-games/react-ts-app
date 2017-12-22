@@ -7,7 +7,7 @@ export interface IHomeRouteProps {
 }
 
 @observer
-class HomeRoute extends React.Component{//<IHomeRouteProps, {}> {
+class HomeRoute extends React.Component<IHomeRouteProps, {}> {
   render() {
     const { className } = this.props
 
