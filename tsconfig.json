@@ -1,27 +1,45 @@
 {
   "version": "2.6.2",
+
   "compilerOptions": {
     "target": "es5",
-    "sourceMap": false,
-    "declaration": true,
+    "sourceMap": true,
     "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": false,
+    "declaration": false,
+    "downlevelIteration": true,
+    "importHelpers": true,
     "removeComments": false,
+
     "strictNullChecks": true,
-    "noImplicitReturns": true,
     "noImplicitUseStrict": true,
     "noImplicitAny": false,
-    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": false,
+
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
     "jsx": "react",
-    "outDir": "dist",
+    "allowJs": false,
+    "checkJs": false,
+
     "lib": [
       "dom",
       "es2015"
     ],
+    
     "plugins": [
       { "name": "typescript-styled-plugin" }
     ]
   },
+
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+
   "exclude": [
     "node_modules",
     "dist"
