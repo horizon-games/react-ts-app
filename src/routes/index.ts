@@ -1,8 +1,6 @@
 import HomeRoute from './HomeRoute'
 import AboutRoute from './AboutRoute'
 import ContactRoute from './ContactRoute'
-import ShowsRoute from './shows/ShowsRoute'
-import ShowRoute from './shows/ShowRoute'
 import TagRoute from './TagRoute'
 import ActorRoute from './ActorRoute'
 import AdminRoute from './AdminRoute'
@@ -25,6 +23,8 @@ export default <any>[
   },
   {
     path: 'shows',
+    // NOTE: both work, if you'd like to name your chunks use this below
+    // loadChildren: () => import(/* webpackChunkName: "shows" */ './shows')
     loadChildren: () => import('./shows')
   },
   {

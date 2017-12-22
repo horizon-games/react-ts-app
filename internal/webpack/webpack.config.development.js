@@ -53,7 +53,7 @@ module.exports = {
     rules: [{
       test: /.tsx?$/,
       use: [{
-        loader: 'ts-loader'
+        loader: 'ts-loader', options: { transpileOnly: true }
       }],
       exclude: path.resolve(process.cwd(), 'node_modules'),
       include: path.resolve(process.cwd(), "src"),

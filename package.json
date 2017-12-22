@@ -1,6 +1,6 @@
 {
-  "name": "react-client-ts",
-  "version": "1.6.10",
+  "name": "react-ts-app",
+  "version": "2.0.0",
   "private": true,
   "license": "none",
   "scripts": {
@@ -31,11 +31,11 @@
     "dotenv": "4.0.0",
     "fork-ts-checker-webpack-plugin": "^0.2.8",
     "html-webpack-plugin": "^2.28.0",
-    "jest": "^22.0.3",
+    "jest": "^22.0.4",
     "prettier": "^1.9.2",
     "react-hot-loader": "^3.0.0",
     "source-map-loader": "^0.2.1",
-    "styled-components": "^2.3.3",
+    "styled-components": "^2.4.0",
     "ts-jest": "^22.0.0",
     "ts-loader": "^3.0.0",
     "tslint": "^5.8.0",
@@ -44,6 +44,7 @@
     "typescript-styled-plugin": "^0.2.2",
     "uglifyjs-webpack-plugin": "^1.0.0",
     "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dev-server": "^2.9.7"
   },
   "jest": {

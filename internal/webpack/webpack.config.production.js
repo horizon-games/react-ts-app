@@ -29,6 +29,7 @@ module.exports = {
   output: {
     path: path.join(process.cwd(), 'dist'),
     filename: '[name].js',
+    chunkFilename: '[name].bundle.js'
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
@@ -41,12 +42,10 @@ module.exports = {
       checkSyntacticErrors: true
     }),
     new webpack.NoEmitOnErrorsPlugin(),
-    new UglifyJSPlugin(
-      /*{
-                  unused: true,
-                  dead_code: true
-              }*/
-    ),
+    new UglifyJSPlugin(/*{
+      unused: true,
+      dead_code: true
+    }*/),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
@@ -72,7 +71,7 @@ module.exports = {
     rules: [{
       test: /.tsx?$/,
       use: [{
-        loader: 'ts-loader'
+        loader: 'ts-loader', options: { transpileOnly: true }
       }],
       exclude: /node_modules/
     }]
