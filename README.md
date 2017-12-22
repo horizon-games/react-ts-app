@@ -1,10 +1,24 @@
-# React-Client in TypeScript
+# React TypeScript app
 
-A port of examples/react-client in TypeScript
+## Features
+
+* React
+* MobX
+* MobX-Little-Router
+* TypeScript
+* Webpack
+* w/ code-splitting and async module loading
 
 ## Usage
+
+**Development:**
 
 ```shell
 $ yarn
 $ yarn start
+```
+
+**Production:**
+``shell
+$ yarn build
 ```
