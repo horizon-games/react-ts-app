@@ -5,7 +5,7 @@
   "license": "none",
   "scripts": {
     "start": "webpack-dev-server --progress --color --config internal/webpack/webpack.config.development.js",
-    "dist": "yarn dist:build",
+    "build": "yarn dist:build",
     "dist:build": "yarn dist:clean && webpack --color --config internal/webpack/webpack.config.production.js",
     "dist:clean": "rm -rf ./dist",
     "dist:analyze": "serve --silent --open --port 5555 ./dist/.stats",
