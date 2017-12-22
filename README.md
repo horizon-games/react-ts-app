@@ -19,6 +19,6 @@ $ yarn start
 ```
 
 **Production:**
-``shell
+```shell
 $ yarn build
 ```
