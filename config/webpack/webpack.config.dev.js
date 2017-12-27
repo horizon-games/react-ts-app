@@ -3,7 +3,6 @@ const fs = require('fs');
 const webpack = require('webpack');
 const shared = require('./shared');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const main = [
