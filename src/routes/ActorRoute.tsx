@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import { extendObservable } from 'mobx'
 import styled from 'styled-components'
 import { Link } from 'mobx-little-router-react'
-import Modal from '../components/Modal'
+import Modal from 'src/components/Modal'
 
 export interface IActorRouteProps {
   className: string

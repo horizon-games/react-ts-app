@@ -1,25 +1,41 @@
 import * as React from 'react'
-import { observer } from 'mobx-react'
-import { withRouter, Outlet } from 'mobx-little-router-react'
+import { Provider, observer } from 'mobx-react'
+import { RouterProvider, Outlet } from 'mobx-little-router-react'
 import styled, { injectGlobal } from 'styled-components'
+import Helmet from 'react-helmet'
 import Header from './components/Header'
 
-export interface IApp {
+interface AppProps {
   router: any
+  stores: any
 }
 
 @observer
-class App extends React.Component<IApp, {}> {
+class App extends React.Component<AppProps> {
   render() {
+    const { router, stores } = this.props
+
     return (
-      <div>
-        <Header />
-        <Viewport>
-          <p>pathname: <b>{JSON.stringify(this.props.router.location.pathname)}</b></p>
-          <Outlet />
-          <Outlet name='modal' />
-        </Viewport>
-      </div>
+      <Provider {...stores}>
+        <RouterProvider router={router}>
+          <div>
+            <Helmet titleTemplate='react-ts-app - %s'>
+              <title>react-ts.app</title>
+              <meta name='description' content='yeay app' />
+              <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+              <link rel='icon' href='' />
+            </Helmet>
+            <div>
+              <Header />
+              <Viewport>
+                <p>pathname: <b>{JSON.stringify(this.props.router.location.pathname)}</b></p>
+                <Outlet />
+                <Outlet name='modal' />
+              </Viewport>
+            </div>
+          </div>
+        </RouterProvider>
+      </Provider>
     )
   }
 }
@@ -47,4 +63,4 @@ injectGlobal`
   }
 `
 
-export default withRouter(App)
+export default App

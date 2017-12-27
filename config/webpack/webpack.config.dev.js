@@ -1,18 +1,19 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
+const shared = require('./shared');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const shared = require('./shared');
 const main = [
   'react-hot-loader/patch',
   'webpack-dev-server/client?http://0.0.0.0:3000',
   'webpack/hot/only-dev-server',
   'whatwg-fetch',
-  './src/index.tsx'
-];
-const vendor = shared.makeVendorEntry({
+  './src/client.tsx'
+]
+const vendor = shared.vendorEntry({
   mainModules: main,
   modulesToExclude: ['']
 })
@@ -29,10 +30,9 @@ module.exports = {
     publicPath: "/"
   },
   plugins: [
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   filename: 'vendor.js'
-    // }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new ForkTsCheckerWebpackPlugin({
@@ -41,12 +41,13 @@ module.exports = {
       watch: ['./src'] // optional but improves performance (fewer stat calls)
     }),
     // new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin(shared.appEnvVars('config/app.dev.env')),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),
     new HtmlWebpackPlugin({
       inject: true,
-      template: 'src/index.html'
+      template: 'src/client.html'
     })
   ],
   module: {
@@ -60,7 +61,10 @@ module.exports = {
     }]
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"]
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      src: path.join(process.cwd(), 'src')
+    }
   },
   devtool: 'inline-source-map',
   devServer: {

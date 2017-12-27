@@ -1,21 +1,30 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as mobx from 'mobx'
-import { createHashHistory } from 'history'
-import { Provider } from 'mobx-react'
-import { install, RouterProvider } from 'mobx-little-router-react'
-import createStores from './stores'
+import { createBrowserHistory, createHashHistory } from 'history'
+import { install } from 'mobx-little-router-react'
 import App from './App'
+import createStores from './stores'
 import routes from './routes'
+import env from './utils/env'
 
 const stores = createStores()
 
+const history = (() => {
+  if (env.MODE === 'server' && env.SERVER_RENDERING === 'on') {
+    return createBrowserHistory()
+  } else {
+    return createHashHistory()
+  }
+})()
+
 const router = install({
-  history: createHashHistory(),
+  history: history,
+  routes: routes,
   getContext: () => ({
-    stores
-  }),
-  routes: routes
+    status: 200,
+    stores: stores
+  })
 })
 
 router.subscribeEvent(ev => {
@@ -48,18 +57,18 @@ function getGroupColor(ev) {
 }
 
 {
-  (window as any).store = router._store;
-  (window as any).router = router;
-  (window as any).mobx = mobx
+  (window as any).mobx = mobx;
+  (window as any).router = router
 }
 
 router.start(() => {
-  ReactDOM.render(
-    <RouterProvider router={router}>
-      <Provider {...stores}>
-        <App />
-      </Provider>
-    </RouterProvider>,
-    document.getElementById('root')
+  let renderFn = ReactDOM.render
+  if (env.MODE === 'server' && env.SERVER_RENDERING === 'on') {
+    renderFn = ReactDOM.hydrate
+  }
+
+  renderFn(
+    <App router={router} stores={stores} />,
+    document.getElementById('app')
   )
 })

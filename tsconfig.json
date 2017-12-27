@@ -25,6 +25,8 @@
     "allowJs": false,
     "checkJs": false,
 
+    "baseUrl": ".",
+
     "lib": [
       "dom",
       "es2015"

@@ -10,7 +10,7 @@
       true,
       "spaces"
     ],
-    "interface-name": true,
+    "interface-name": false,
     "jsdoc-format": true,
     "no-consecutive-blank-lines" : true,
     "no-debugger": true,
@@ -18,9 +18,9 @@
     "no-eval": true,
     "no-internal-module": true,
     "no-trailing-whitespace": true,
-    "no-shadowed-variable": true,
+    "no-shadowed-variable": false,
     "no-switch-case-fall-through": true,
-    "no-unused-expression": false, // true?
+    "no-unused-expression": false,
     "no-use-before-declare": false,
     "no-var-keyword": true,
     "one-line": [

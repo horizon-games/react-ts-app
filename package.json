@@ -4,11 +4,14 @@
   "private": true,
   "license": "none",
   "scripts": {
-    "start": "webpack-dev-server --progress --color --config internal/webpack/webpack.config.development.js",
+    "start": "yarn dev",
+    "dev": "webpack-dev-server --progress --color --config config/webpack/webpack.config.dev.js",
     "build": "yarn dist:build",
-    "dist:build": "yarn dist:clean && webpack --color --config internal/webpack/webpack.config.production.js",
+    "dist": "yarn dist:build",
+    "dist:build": "yarn dist:clean && webpack --color --config config/webpack/webpack.config.dist.js",
     "dist:clean": "rm -rf ./dist",
-    "dist:serve": "serve --port 4000 --silent --open ./dist",
+    "dist:client": "serve --silent --port 3000 ./dist",
+    "dist:server": "node dist/server",
     "dist:analyze": "serve --silent --open --port 5555 ./dist/.stats",
     "lint": "tslint -c tslint.json src/**/*.ts src/**/*.tsx",
     "test:watch": "jest --watchAll",
@@ -16,6 +19,7 @@
   },
   "dependencies": {
     "core-js": "^2.5.3",
+    "global": "^4.3.2",
     "history": "^4.7.2",
     "mobx": "^3.4.1",
     "mobx-little-router": "^1.6.10",
@@ -23,7 +27,7 @@
     "mobx-react": "^4.3.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "whatwg-fetch": "2.0.3"
+    "react-helmet": "^5.2.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
@@ -31,10 +35,11 @@
     "@types/react": "16.0.31",
     "@types/react-dom": "^16.0.3",
     "@types/react-hot-loader": "^3.0.4",
-    "dotenv": "4.0.0",
-    "fork-ts-checker-webpack-plugin": "^0.2.8",
+    "express": "^4.16.2",
+    "fork-ts-checker-webpack-plugin": "^0.2.10",
     "html-webpack-plugin": "^2.28.0",
     "jest": "^22.0.4",
+    "node-fetch": "^1.7.2",
     "prettier": "^1.9.2",
     "react-hot-loader": "^3.0.0",
     "serve": "^6.4.3",
@@ -47,8 +52,9 @@
     "tslint-react": "^3.2.0",
     "typescript": "2.6.2",
     "typescript-styled-plugin": "^0.2.2",
-    "uglifyjs-webpack-plugin": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^1.1.5",
     "webpack": "^3.10.0",
+    "webpack-assets-by-type-plugin": "^0.1.0",
     "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dev-server": "^2.9.7"
   },
@@ -59,7 +65,7 @@
       }
     },
     "setupFiles": [
-      "<rootDir>/internal/tests/browserMocks.js"
+      "<rootDir>/config/tests/browserMocks.js"
     ],
     "moduleFileExtensions": [
       "ts",
@@ -71,8 +77,8 @@
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internal/tests/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/internal/tests/styleMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/tests/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/config/tests/styleMock.js"
     }
   }
 }

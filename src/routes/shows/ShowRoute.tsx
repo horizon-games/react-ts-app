@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import styled from 'styled-components'
 import { Link } from 'mobx-little-router-react'
 
-import Modal from '../../components/Modal'
+import Modal from 'src/components/Modal'
 
 const ShowRoute = ({ route: { params, query }, className, ShowsStore }) => {
   let prevShow, nextShow
