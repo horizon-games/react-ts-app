@@ -13,6 +13,7 @@ const main = [
 ]
 
 const vendor = [
+  'core-js/shim',
   'global',
   'history',
   'mobx',
