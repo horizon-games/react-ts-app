@@ -15,10 +15,11 @@
 
 ```shell
 $ yarn
-$ yarn start
+$ yarn dev
 ```
 
 **Production:**
 ```shell
-$ yarn build
+$ yarn dist
+$ yarn dist:server
 ```
