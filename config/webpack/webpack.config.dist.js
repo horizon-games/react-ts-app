@@ -79,14 +79,17 @@ const clientConfig = {
       checkSyntacticErrors: true
     }),
     new webpack.DefinePlugin(shared.appEnvVars('config/app.dist.env')),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'client',
-      async: true,
-      children: true
-    }),
+    // TODO: refactor to use optimization.splitChunks, 
+    // see https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
+    //
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor'
+    // }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'client',
+    //   async: true,
+    //   children: true
+    // }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
