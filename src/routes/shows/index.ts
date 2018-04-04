@@ -7,7 +7,7 @@ export default <any[]>[
     query: ['q'],
     getData: () => ({ resolveStatus: null }),
     willResolve: async route => {
-      const { ShowsStore } = route.context.stores
+      const { showsStore } = route.context.stores
       let data
 
       (async () => {
@@ -30,7 +30,7 @@ export default <any[]>[
             const json = await res.json()
             data = json.map(({ show }) => show)
 
-            ShowsStore.load(data)
+            showsStore.load(data)
           }
           route.data.resolveStatus = 'FULFILLED'
         } catch (err) {
@@ -44,12 +44,12 @@ export default <any[]>[
         path: ':id',
         query: ['q'],
         willResolve: async route => {
-          const { ShowsStore } = route.context.stores
+          const { showsStore } = route.context.stores
           const res = await fetch(
             `https://api.tvmaze.com/shows/${route.params.id}?embed=cast`
           )
           const data = await res.json()
-          ShowsStore.loadDetails(route.params.id, data)
+          showsStore.loadDetails(route.params.id, data)
         },
         component: ShowRoute,
         outlet: 'modal',

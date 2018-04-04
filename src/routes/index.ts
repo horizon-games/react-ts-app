@@ -52,11 +52,11 @@ export default <any>[
     path: 'admin',
     component: AdminRoute,
     canActivate: (route, navigation) => {
-      const { stores: { SessionStore } } = route.context
-      if (SessionStore.isAuthenticated) {
+      const { stores: { sessionStore } } = route.context
+      if (sessionStore.isAuthenticated) {
         return true
       } else {
-        SessionStore.unauthorizedNavigation = navigation
+        sessionStore.unauthorizedNavigation = navigation
         return navigation.redirectTo('/login')
       }
     },

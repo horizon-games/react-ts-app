@@ -5,21 +5,21 @@ import { Link } from 'mobx-little-router-react'
 
 import Modal from 'src/components/Modal'
 
-const ShowRoute = ({ route: { params, query }, className, ShowsStore }) => {
+const ShowRoute = ({ route: { params, query }, className, showsStore }) => {
   let prevShow, nextShow
 
-  if (ShowsStore.shows && ShowsStore.shows.length > 0) {
-    const currIdx = ShowsStore.shows.findIndex(show => show.id === Number(params.id))
+  if (showsStore.shows && showsStore.shows.length > 0) {
+    const currIdx = showsStore.shows.findIndex(show => show.id === Number(params.id))
 
     if (currIdx > 0) {
-      prevShow = ShowsStore.shows[currIdx - 1]
+      prevShow = showsStore.shows[currIdx - 1]
     }
 
-    if (currIdx < ShowsStore.shows.length - 1) {
-      nextShow = ShowsStore.shows[currIdx + 1]
+    if (currIdx < showsStore.shows.length - 1) {
+      nextShow = showsStore.shows[currIdx + 1]
     }
   }
-  const model = ShowsStore.getDetails(params.id)
+  const model = showsStore.getDetails(params.id)
 
   return (
     <Modal className={className} closePath={`/shows?q=${query.q}`}>
@@ -211,4 +211,4 @@ const Actor = styled(Link)`
   }
 `
 
-export default inject('ShowsStore')(observer(ShowRoute))
+export default inject('showsStore')(observer(ShowRoute))

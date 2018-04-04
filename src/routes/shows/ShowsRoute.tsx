@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { Link, withRouter } from 'mobx-little-router-react'
 import styled, { keyframes } from 'styled-components'
 
-const ShowsRoute = ({ router, route, ShowsStore, className }) =>
+const ShowsRoute = ({ router, route, showsStore, className }) =>
   <Container className={className}>
     <SearchHeader>
       <SearchInput
@@ -21,7 +21,7 @@ const ShowsRoute = ({ router, route, ShowsStore, className }) =>
           case 'FULFILLED':
             return (
               <SearchResults>
-                {ShowsStore.shows.map(show =>
+                {showsStore.shows.map(show =>
                   <Show key={show.id}>
                     <CoverImage
                       to={`/shows/${show.id}?q=${route.query.q}`}
@@ -157,4 +157,4 @@ const SearchInput = styled.input.attrs({
   padding: 0 9px;
 `
 
-export default inject('ShowsStore')(withRouter(observer(ShowsRoute)))
+export default inject('showsStore')(withRouter(observer(ShowsRoute)))

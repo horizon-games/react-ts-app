@@ -6,20 +6,20 @@ import styled from 'styled-components'
 
 export interface ILoginRouteProps {
   className: string
-  SessionStore: any
+  sessionStore: any
   router: any
 }
 
 @observer
 class LoginRoute extends React.Component<ILoginRouteProps, {}> {
   login = () => {
-    const { SessionStore, router } = this.props
+    const { sessionStore, router } = this.props
 
     runInAction(() => {
-      SessionStore.isAuthenticated = true
+      sessionStore.isAuthenticated = true
 
-      const redirectTo = SessionStore.unauthorizedNavigation
-        ? SessionStore.unauthorizedNavigation.to
+      const redirectTo = sessionStore.unauthorizedNavigation
+        ? sessionStore.unauthorizedNavigation.to
         : '/'
 
       router.push(redirectTo)
@@ -86,4 +86,4 @@ const LoginButton = styled.button`
   }
 `
 
-export default withRouter(inject('SessionStore')(LoginRoute))
+export default withRouter(inject('sessionStore')(LoginRoute))
