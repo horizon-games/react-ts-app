@@ -29,17 +29,14 @@ module.exports = {
     publicPath: "/"
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    }),
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new ForkTsCheckerWebpackPlugin({
       tslint: true,
       checkSyntacticErrors: true,
       watch: ['./src'] // optional but improves performance (fewer stat calls)
     }),
-    // new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin(shared.appEnvVars('config/app.dev.env')),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
@@ -56,11 +53,16 @@ module.exports = {
         loader: 'ts-loader', options: { transpileOnly: true }
       }],
       exclude: path.resolve(process.cwd(), 'node_modules'),
-      include: path.resolve(process.cwd(), "src"),
+      include: path.resolve(process.cwd(), 'src'),
+    },{
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      use: [{
+        loader: 'url-loader', options: { limit: 8192 }
+      }]
     }]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.png', '.jpg'],
     alias: {
       src: path.join(process.cwd(), 'src')
     }
@@ -72,6 +74,7 @@ module.exports = {
     open: false,
     hot: true,
     historyApiFallback: true,
-    stats: 'errors-only'
+    stats: 'errors-only',
+    disableHostCheck: true
   }
 };
