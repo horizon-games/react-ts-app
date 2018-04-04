@@ -1,8 +1,9 @@
 {
+  "defaultSeverity": "warning",
   "rules": {
     "class-name": true,
     "comment-format": [
-      true,
+      false,
       "check-space"
     ],
     "curly": false,
@@ -12,12 +13,12 @@
     ],
     "interface-name": false,
     "jsdoc-format": true,
-    "no-consecutive-blank-lines" : true,
+    "no-consecutive-blank-lines" : false,
     "no-debugger": true,
     "no-duplicate-variable": true,
     "no-eval": true,
     "no-internal-module": true,
-    "no-trailing-whitespace": true,
+    "no-trailing-whitespace": false,
     "no-shadowed-variable": false,
     "no-switch-case-fall-through": true,
     "no-unused-expression": false,
@@ -63,7 +64,6 @@
       true,
       "check-branch",
       "check-decl",
-      "check-operator",
       "check-separator",
       "check-type"
     ]
